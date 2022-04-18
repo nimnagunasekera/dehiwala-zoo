@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Purchase/Donate</title>
+    <link rel="stylesheet" href="design.css">
+    <link rel="stylesheet" href="normalize.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="Images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="Images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="Images/favicon-16x16.png">
+    <link rel="manifest" href="Images/site.webmanifest">
+    <link rel="shortcut icon" href="Images/favicon.ico">
+    <meta name="msapplication-TileColor" content="#1c996d">
+    <meta name="msapplication-config" content="Images/browserconfig.xml">
+    <meta name="theme-color" content="#ffffff">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Shadows+Into+Light+Two&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+<body >
+
+<!--------------------------------------------------------- Header ----------------------------------------------------------------->
+    <header > 
+        <input type="checkbox" id="nav-toggle" class="nav-toggle">
+            <a href="index.html" class="logo">
+                <img src="Images/logo 3.webp" alt="zoo logo">
+            </a>
+            
+        <nav>
+            <div class="navigation">
+             <ul>
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="typesOfAnimals&Plants.html">ANIMALS/PLANTS</a></li>
+                <li><a href="activities.html">ACTIVITIES</a></li>
+                <li><a href="#">PURCHASE/DONATE</a></li>
+                <li><a href="contactUsPage.html">CONTACT US</a></li>
+             </ul>
+            </div>
+        </nav>
+        <label for="nav-toggle" class="nav-toggle-label">
+            <span>&#9776;Menu</span>
+        </label>
+    </header>
+
+<!-------------------------------------------------------- Banner 4 ------------------------------------------------------------->
+
+    <div class="banner4">
+        <img src="Images/DonateBanner.webp" alt="Banner4">
+        <div class="BannerText4">PURCHASE/DONATE</div>
+    </div>
+
+<!-------------------------------------------------------- Section 13 ------------------------------------------------------------->
+<div class="section15">
+    <div class="side1">
+    <h1>Purchase Tickets</h1>
+    <form id="frmPurchase">
+        <label><span>Ticket Type :</span> </label>
+        <select id="cmbTick" name="cmbTick" onchange="calcCost();" >
+            <option value="">--Select Here--</option>
+            <option value="0">Day Pass</option>
+            <option value="1">Student Pass</option>
+            <option value="2">Foreigner Pass</option>
+        </select>
+        <br />
+        <br />
+        <label><span>Adults :</span> </label>
+        <input type="number" size="3" id="txtAdults" name="txtAdults" onblur="calcCost();" />
+        <br />
+        <br />
+        <label><span>Children :</span></label>
+        <input type="number" size="3" id="txtChildren" name="txtChildren" onblur="calcCost();" />
+        <br />
+        <br />
+        <label><span>Duration :</span></label> 
+        <select id="cmbDur" name="cmbDur" onchange="calcCost();" >
+            <option value="">3 Hours</option>
+            <option value="0">1/2 Day</option>
+            <option value="1">Full Day</option>
+            <option value="2">2 Days</option>
+        </select>
+        <br />
+        <br />
+        <label for="optional">
+            <input type="checkbox" id="optional" onclick="extras();" />
+        </label>
+        <label ><span> Extras : </span></label>
+        <div id="divExtras" style="display: none;">
+            <label><span>Annual Pass : </span> </label>
+            <label><input type="number" size="3" id="txtAnnual" name="txtAnnual" onblur="calcCost();" /></label>
+            <label><span>Food Tokens :</span></label>
+            <label><input type="number" size="3" id="txtFood" name="txtFood" onblur="calcCost();" /></label>
+        </div>
+        <br />
+        <br />
+        <label ><span>Cost :</span> <span id="spCost">0.00</span></label>
+        <br />
+        <br />
+        <label><input type="button"  value="Add to Order"  id="btn1" onclick="addToOrder();" ></label>
+        <div>
+            <label><input type="button" value="Add to Favourites" id="addFavourite" ></label>
+        </div>
+        <label><input type="button"  value="Order Favourite" id="retriveFavourite" ></label>
+    </form>
+
+    <label><input type="button"  value="Check Loyalty" id="btn2" onclick="displayLp();" ></label>
+</div>
+    <div id="div_1" style="display: none;" >
+        <hr />
+        <h1>Overall Order</h1>
+        <div class="test">
+        <table id="tbl_brdr">
+            <thead>
+                <tr>
+                    <th>Type</th>
+                    <th>Adults</th>
+                    <th>Children</th>
+                    <th>Duration</th>
+                    <th>Annual Passes</th>
+                    <th>Food Tokens</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody id="tbody_1"></tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="6">Overall Cost(LKR)</th>
+                    <th colspan="1" id="GrandTotal">0.00</th>
+                    <th></th>
+                </tr>
+            </tfoot>
+           </table>
+        </div>
+        </div>
+        
+        <input type="button" value="Place Order" id="btn3" onclick="placeOrder();"/>
+        <hr>
+        <div class="side2">
+        <div id="donation">
+        <h1>Donations</h1>
+        <form id="frmDon">
+            <label><span>Enter Details :</span></label> 
+            <input type="text" id="name" placeholder="Name" >
+            <input type="text" id="address" placeholder="Address">
+            <br />
+            <br />
+            <label><span>Enter Card Details :</span></label> 
+            <input type="tel" id="cc-number"  maxlength="19" placeholder="Card Number" data-mask="0000 0000 0000 0000">
+            <input type="tel" id="cc-expire"  maxlength="5" placeholder="MM/YY" data-mask="00/00">
+            <input type="tel" id="cc-cvv"  maxlength="3" placeholder="CVV" data-mask="000">
+            <br />
+            <br />
+            <label><span>Select Amount :</span></label>
+            <br />
+            <select id="cmbDon"onsubmit="donVal();" >
+                <option value="">--Select Here--</option>
+                <option value="0">LKR 100.00</option>
+                <option value="1">LKR 250.00</option>
+                <option value="2">LKR 500.00</option>
+                <option value="3">LKR 1000.00</option>
+                <option value="4">LKR 2500.00</option>
+                <option value="5">LKR 5000.00</option>
+                <option value="6">LKR 10000.00</option>
+            </select>
+        <br />
+        <br />
+        <input type="button" value="Donate" onclick="donVal();">
+        </form>
+    </div>
+    <br />
+    <br />
+   </div>
+</div>
+<!-------------------------------------------------------- Footer ---------------------------------------------------------------->
+<footer>
+    
+    <div class="col1">
+        <h2>Park Info</h2>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="https://www.tripadvisor.com/Attraction_Review-g293962-d447453-Reviews-National_Zoological_Gardens_of_Sri_Lanka-Colombo_Western_Province.html#REVIEWS">Tripadvisor</a></li>
+                <li><a href="#">More Info</a></li>
+            </ul>
+    </div>
+
+    <div class="col2">
+        <h2>Visit</h2>
+            <ul>
+                <li><a href="http://nationalzoo.gov.lk/pinnawalazoo/">Pinnawala Zoo</a></li>
+                <li><a href="http://nationalzoo.gov.lk/elephantorphanage/">Pinnawala Elephant Orphanage</a></li>
+                <li><a href="https://www.president.gov.lk/">President Of Sri Lanka</a></li>
+                <li><a href="https://www.presidentsoffice.gov.lk/">Presidential Secretariat</a></li>
+            </ul>
+    </div>
+
+    <div class="col3">
+        <h2>Contact Us</h2>
+            <div class="contact">
+                <ol>
+                    <li>Address: <br> Department Of National Zoological Gardens, Anagarika Dharmapala mawatha, Dehiwala</li>
+                    <br>
+                    <li>Hotline: <br> 011-2712751</li>
+                    <br>
+                    <li>Email: <br> zoosl@slt.lk</li>
+                </ol>
+            </div>
+    </div>
+
+
+<!-------------------------------------------------------- References ------------------------------------------------------------------
+    1)Images,
+        i)logo 3.webp :-    FreeLogo Design, 2021. [Online] 
+                            Available at: https://www.freelogodesign.org/
+                            [Accessed 17 12 2021].
+                            
+        ii)DonateBanner.webp :- WallpaperAccess, 2021. baby-deer. [Online] 
+                                Available at: https://wallpaperaccess.com/baby-deer
+                                [Accessed 23 12 2021].
+
+    2)Entrance fees :-      Dehiwala Zoological Gardens, 2021. Visitor Information. [Online] 
+                            Available at: http://nationalzoo.gov.lk/zoo/visitor-information/
+                            [Accessed 23 12 2021].
+      
+    3)Donations :-  Dehiwala Zoological Gardens, 2021. Sponsorship,Adoption & Donation. [Online] 
+                    Available at: http://nationalzoo.gov.lk/animal-adoptions/#
+                    [Accessed 23 12 2021].          
+--->
+
+    </footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <script src="main.js"></script>
+</html>
+
+    
